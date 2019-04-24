@@ -1,0 +1,54 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+
+    <div class="header">
+      Header
+    </div>
+
+    <div class="main">
+      <input type="text" formControlName="textData" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.textData.errors }" />
+      <div *ngIf="submitted && f.textData.errors" class="invalid-feedback">
+        <div *ngIf="f.textData.errors.required">Text data is required</div>
+        <div *ngIf="f.textData.errors.maxlength">Text data must be less than 50 characters</div>
+      </div>
+
+      <input type="number" appTwoDigitDecimaNumber formControlName="numberData" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.numberData.errors }" />
+      <div *ngIf="submitted && f.numberData.errors" class="invalid-feedback">
+        <div *ngIf="f.numberData.errors.required">Number data is required</div>
+        <div *ngIf="f.numberData.errors.min">Number data must be greater than 0</div>
+        <div *ngIf="f.numberData.errors.max">Number data must be less than 10000</div>
+      </div>
+
+      <div class="request-list">
+        <table>
+          <tr>
+            <th>Type</th>
+            <th>Timestamp</th>
+            <th>Text</th>
+            <th>Number</th>
+          </tr>
+          <tr *ngFor="let request of requestList">
+            <td>{{request.type}}</td>
+            <td>{{request.timestamp}}</td>
+            <td>{{request.request?.textData}}</td>
+            <td>{{request.request?.numberData}}</td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <h4>test</h4>
+      <button>request</button>
+    </div>
+  </form>
+</div>
+
+<router-outlet></router-outlet>
